@@ -3,18 +3,51 @@ var Tree = function(value) {
   newTree.value = value;
 
   // your code here
-  newTree.children = null;  // fix me
-
+  // newTree.children = null;  // fix me
+  newTree.children = [];
+  extend(newTree, treeMethods);
   return newTree;
 };
 
-var treeMethods = {};
+var extend = function(to,from){
+  for(var key in from){
+    to[key] = from[key];
+  }
+}
 
-treeMethods.addChild = function(value) {
-};
+var treeMethods = {addChild: function(value) {
+  this.children.push(Tree(value));
 
-treeMethods.contains = function(target) {
-};
+},
+
+contains: function(target) {
+  var result = false;
+
+  // if(this.value === target){
+  //   result = true;
+  // }else if(this.children.length > 0){
+  //   for(var i = 0; i < this.children.length; i++){
+  //     if(children[i].value.contains(this, target)){
+  //       result = true;
+  //     }
+  //   }
+  // }
+
+  findThis(this);
+  return result;
+
+  function findThis(child){
+    if(child.value === target){
+      result = true;
+    }else if(child.children.length > 0){
+      child.children.forEach(node => findThis(node));
+    }
+  }
+
+
+}};
+
+
 
 
 
