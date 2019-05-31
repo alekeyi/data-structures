@@ -53,4 +53,5 @@ contains: function(target) {
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ addChild is O(1), contains is O(n) [because it is not a self-balancing binary-search tree]
  */
