@@ -42,8 +42,17 @@ Graph.prototype.contains = function(node) {
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
     
-    this.nodes[node] = undefined;
     
+    
+    //iterate thru object
+    for (var key in this.nodes){
+        //if this.node[key] contains node
+        if (this.nodes[key].includes(node)){
+            //splice node out of array
+            this.nodes[key] = this.nodes[key].filter(connectedNode => connectedNode !== node);
+        }
+    }
+    this.nodes[node] = undefined;
 };
 
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
@@ -66,12 +75,18 @@ Graph.prototype.addEdge = function(fromNode, toNode) {
 
 // Remove an edge between any two specified (by value) nodes.
 Graph.prototype.removeEdge = function(fromNode, toNode) {
-
+    //access array, splice toNode from array
+    this.nodes[fromNode] = this.nodes[fromNode].filter(connectedNode => connectedNode !== toNode);
+    this.nodes[toNode] = this.nodes[toNode].filter(connectedNode => connectedNode !== fromNode);
 };
 
 // Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
-
+    //iterate thru object
+    for (var key in this.nodes) {
+        //for each node, execute callback
+        cb.call(this, key);
+    }
 };
 
 /*
